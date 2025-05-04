@@ -1,4 +1,5 @@
 package app;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -6,6 +7,22 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Client {
+    private int id;
+    private Socket socket;
+
+    public Client(int id, Socket socket) {
+        this.id = id;
+        this.socket = socket;
+    }
+
+    public int getID() {
+        return this.id;
+    }
+
+    public Socket getSocket() {
+        return this.socket;
+    }
+
     public static void client(int port) {
         Scanner scnr = new Scanner(System.in);
 
