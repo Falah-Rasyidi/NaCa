@@ -11,11 +11,10 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class ClientHandler implements Runnable {
     private final LinkedBlockingQueue<Socket> CLIENT_QUEUE;
-    private ArrayList<Socket> clients;
+    private ArrayList<Socket> clients = new ArrayList<Socket>();
 
     public ClientHandler(LinkedBlockingQueue<Socket> queue) {
         CLIENT_QUEUE = queue;
-        clients = new ArrayList<Socket>();
     }
 
     @Override
@@ -24,7 +23,7 @@ public class ClientHandler implements Runnable {
 
         try {
             while (true) {
-                // If theres a new client, assign them to a new Client object and place into clients list
+                // If theres a new client, grab from listener thread queue and add to clients array list
                 if (!CLIENT_QUEUE.isEmpty()) {
                     clients.add(CLIENT_QUEUE.poll());
                 }

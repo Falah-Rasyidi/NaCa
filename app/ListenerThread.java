@@ -7,7 +7,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /*
  * All this class does is listens for new clients.
- * After a client connects, pass it to the client handler via a queue?
+ * After a client connects, pass it to the client handler via a blocking queue. able to pass info between threads
  */
 public class ListenerThread implements Runnable {
     private final LinkedBlockingQueue<Socket> CLIENT_QUEUE;
@@ -18,6 +18,7 @@ public class ListenerThread implements Runnable {
         PORT_NUMBER = port;
     }
 
+    @Override
     public void run() {
         try {
             ServerSocket server = new ServerSocket(PORT_NUMBER);
@@ -26,7 +27,8 @@ public class ListenerThread implements Runnable {
             while (true) {
                 Socket socket = server.accept();
                 System.out.println("client accepted");
-                // After client connects, create new thread for them and put into queue
+
+                // After client connects, place into queue to be picked up by client handler
                 CLIENT_QUEUE.add(socket);
             }
 
