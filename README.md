@@ -1,4 +1,6 @@
 # NaCa (WIP)
+![architecture](./architecture.png)
+^^^architecture (supremely scuffed)^^^
 
 ## Table of Contents
 * [General info](#general-info)
