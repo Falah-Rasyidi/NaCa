@@ -6,8 +6,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class Server {
     public static void server(LinkedBlockingQueue<Socket> queue, int port) throws IOException {
-        System.out.println("This is the server");
-
         // Start listener thread. Sole job is to listen for new clients
         new Thread(new ListenerThread(queue, port)).start();
 

@@ -26,7 +26,7 @@ public class ListenerThread implements Runnable {
 
             while (true) {
                 Socket socket = server.accept();
-                System.out.println("client accepted");
+                System.out.println("\nClient accepted");
 
                 // After client connects, place into queue to be picked up by client handler
                 CLIENT_QUEUE.add(socket);
