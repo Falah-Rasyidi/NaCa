@@ -1,44 +1,18 @@
 package app;
 import java.io.DataOutputStream;
-import java.io.FilterOutputStream;
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-public class Client implements Runnable {
-    private Socket socket;
-
-    public Client() {
-    }
-
-    public Client(Socket socket) {
-        this.socket = socket;
-    }
-
-    public void initialise() {
-        System.out.println("This is the client");
-        final String IP_ADDRESS = "localhost";
-        final int PORT_NUMBER = 3000;
-        
-        try {
-            // Define socket for client and attempt connection
-            this.socket = new Socket(IP_ADDRESS, PORT_NUMBER);
-
-            // If connection successful, move to run method
-            run();
-
-        } catch (Exception e) {
-            System.out.println("Can't connect to server");
-        }
-    }
-
-    @Override
-    public void run() {
+public class Client {
+    public static void client(int port) {
         Scanner scnr = new Scanner(System.in);
 
         try {
+            // Create client socket
+            Socket socket = new Socket("localhost", port);
+
             // Prepare outgoing message
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             String message = scnr.nextLine();
