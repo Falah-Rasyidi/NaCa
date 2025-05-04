@@ -11,6 +11,8 @@
 ## General Info
 NaCa (Not another chat app) is a simple, terminal-based chat app written in Java. I've started this project to learn the fundamentals of network programming such as streams, servers/clients, threads and sockets.
 
+Currently, I've only just implemented the ability for multiple clients to connect and send messages to the server
+
 ## Technologies
 * Java
 
