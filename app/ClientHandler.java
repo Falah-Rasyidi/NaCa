@@ -3,6 +3,8 @@ package app;
 import java.io.DataInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /*
@@ -29,12 +31,20 @@ public class ClientHandler implements Runnable {
                 }
 
                 // Poll existing clients for messages
-                for (Socket socket : clients) {
+                for (Iterator<Socket> iterator = clients.iterator(); iterator.hasNext(); ) {
+                    Socket socket = iterator.next();
                     DataInputStream dis = new DataInputStream(socket.getInputStream());
 
-                    // Print message only if there's actual content
+                    // Print message only if there's content
                     if (dis.available() != NO_CONTENT) {
                         String message = dis.readUTF();
+
+                        if (message.equals("exit")) {
+                            // Remove socket
+                            iterator.remove();
+                            continue;
+                        }
+
                         System.out.printf("%nMessage received!%n    %s%n", message);
                     }
                 }
